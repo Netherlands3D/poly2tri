@@ -1,0 +1,21 @@
+{
+  "name": "eu.netherlands3d.poly2tri",
+  "version": "1.0.0",
+  "displayName": "poly2tri",
+  "description": "Unity Package version of the poly2tri library: https://github.com/Unity-Technologies/poly2tri-cs",
+  "unity": "2017.1",
+  "documentationUrl": "https://github.com/Unity-Technologies/poly2tri-cs",
+  "changelogUrl": "https://raw.githubusercontent.com/Netherlands3D/poly2tri/master/CHANGELOG.md",
+  "licensesUrl": "https://raw.githubusercontent.com/Netherlands3D/poly2tri/master/LICENSE.txt",
+  "keywords": [
+    "poly2tri",
+    "polygon",
+    "triangulate"
+  ],
+  "author": {
+    "name": "Various",
+    "url": "https://raw.githubusercontent.com/Netherlands3D/poly2tri/master/AUTHORS.txt"
+  },
+  "dependencies": {
+  }
+}
