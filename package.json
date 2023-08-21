@@ -1,8 +1,8 @@
 {
   "name": "eu.netherlands3d.poly2tri",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "displayName": "poly2tri",
-  "description": "Unity Package version of the poly2tri library: https://github.com/Unity-Technologies/poly2tri-cs",
+  "description": "Unity Package version of the poly2tri library based on https://github.com/Unity-Technologies/poly2tri-cs",
   "unity": "2017.1",
   "documentationUrl": "https://github.com/Unity-Technologies/poly2tri-cs",
   "changelogUrl": "https://raw.githubusercontent.com/Netherlands3D/poly2tri/master/CHANGELOG.md",

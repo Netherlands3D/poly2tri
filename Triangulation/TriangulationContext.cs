@@ -29,43 +29,121 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Poly2Tri {
-	public abstract class TriangulationContext {
-		public TriangulationDebugContext DebugContext { get; protected set; }
 
-		public readonly List<DelaunayTriangle> Triangles = new List<DelaunayTriangle>();
-		public readonly List<TriangulationPoint> Points = new List<TriangulationPoint>(200);
-		public TriangulationMode TriangulationMode { get; protected set; }
-		public Triangulatable Triangulatable { get; private set; }
+namespace Poly2Tri
+{
+    public abstract class TriangulationContext
+    {
+        public TriangulationDebugContext DebugContext { get; protected set; }
 
-		public int StepCount { get; private set; }
+        public readonly List<DelaunayTriangle> Triangles = new List<DelaunayTriangle>();
+        public readonly List<TriangulationPoint> Points = new List<TriangulationPoint>(200);
+        public TriangulationMode TriangulationMode { get; protected set; }
+        public ITriangulatable Triangulatable { get; private set; }
 
-		public void Done() {
-			StepCount++;
-		}
+        public int StepCount { get; private set; }
 
-		public abstract TriangulationAlgorithm Algorithm { get; }
+        public void Done()
+        {
+            StepCount++;
+        }
 
-		public virtual void PrepareTriangulation(Triangulatable t) {
-			Triangulatable = t;
-			TriangulationMode = t.TriangulationMode;
-			t.Prepare(this);
-		}
+        public abstract TriangulationAlgorithm Algorithm { get; }
 
-		public abstract TriangulationConstraint NewConstraint(TriangulationPoint a, TriangulationPoint b);
 
-		public void Update(string message) {}
+        public virtual void PrepareTriangulation(ITriangulatable t)
+        {
+            Triangulatable = t;
+            TriangulationMode = t.TriangulationMode;
+            t.Prepare(this);
 
-		public virtual void Clear() {
-			Points.Clear();
-			if (DebugContext != null) DebugContext.Clear();
-			StepCount = 0;
-		}
+            //List<TriangulationConstraint> constraints = new List<TriangulationConstraint>();
 
-		public virtual bool IsDebugEnabled { get; protected set; }
+            //Console.WriteLine("Points for " + t.FileName + ":");
+            //Console.WriteLine("Idx,X,Y,VC,Edges");
+            //int numPoints = Points.Count;
+            //for (int i = 0; i < numPoints; ++i)
+            //{
+            //    StringBuilder sb = new StringBuilder(128);
+            //    sb.Append(i.ToString());
+            //    sb.Append(",");
+            //    sb.Append(Points[i].X.ToString());
+            //    sb.Append(",");
+            //    sb.Append(Points[i].Y.ToString());
+            //    sb.Append(",");
+            //    sb.Append(Points[i].VertexCode.ToString());
+            //    int numEdges = (Points[i].Edges != null) ? Points[i].Edges.Count : 0;
+            //    for (int j = 0; j < numEdges; ++j)
+            //    {
+            //        TriangulationConstraint tc = Points[i].Edges[j];
+            //        sb.Append(",");
+            //        sb.Append(tc.ConstraintCode.ToString());
+            //        constraints.Add(tc);
+            //    }
+            //    Console.WriteLine(sb.ToString());
+            //}
 
-		public DTSweepDebugContext DTDebugContext { get { return DebugContext as DTSweepDebugContext; } }
-	}
+            //int idx = 0;
+            //Console.WriteLine("Constraints " + t.FileName + ":");
+            //Console.WriteLine("EdgeIdx,Px,Py,PVC,Qx,Qy,QVC,ConstraintCode,Owner");
+            //foreach (TriangulationConstraint tc in constraints)
+            //{
+            //    StringBuilder sb = new StringBuilder(128);
+
+            //    sb.Append(idx.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.P.X.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.P.Y.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.P.VertexCode.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.Q.X.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.Q.Y.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.Q.VertexCode.ToString());
+            //    sb.Append(",");
+            //    sb.Append(tc.ConstraintCode.ToString());
+            //    sb.Append(",");
+            //    if (tc.Q.HasEdge(tc.P))
+            //    {
+            //        sb.Append("Q");
+            //    }
+            //    else
+            //    {
+            //        sb.Append("P");
+            //    }
+            //    Console.WriteLine(sb.ToString());
+
+            //    ++idx;
+            //}
+        }
+
+
+        public abstract TriangulationConstraint NewConstraint(TriangulationPoint a, TriangulationPoint b);
+
+
+        public void Update(string message) { }
+
+
+        public virtual void Clear()
+        {
+            Points.Clear();
+            if (DebugContext != null)
+            {
+                DebugContext.Clear();
+            }
+            StepCount = 0;
+        }
+
+
+        public virtual bool IsDebugEnabled { get; protected set; }
+
+        public DTSweepDebugContext DTDebugContext { get { return DebugContext as DTSweepDebugContext; } }
+    }
 }

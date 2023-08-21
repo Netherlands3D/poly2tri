@@ -31,17 +31,27 @@
 
 using System.Collections.Generic;
 
-namespace Poly2Tri {
-	public interface Triangulatable {
-		void Prepare(TriangulationContext tcx);
+namespace Poly2Tri
+{
+    public interface ITriangulatable
+    {
+        //IList<TriangulationPoint> Points { get; } // MM: Neither of these are used via interface (yet?)
+        IList<DelaunayTriangle> Triangles { get; }
+        TriangulationMode TriangulationMode { get; }
+        string FileName { get; set; }
+        bool DisplayFlipX { get; set; }
+        bool DisplayFlipY { get; set; }
+        float DisplayRotate { get; set; }
+        double Precision { get; set; }
+        double MinX { get; }
+        double MaxX { get; }
+        double MinY { get; }
+        double MaxY { get; }
+        Rect2D Bounds { get; }
 
-		IList<TriangulationPoint> Points { get; } // MM: Neither of these are used via interface (yet?)
-		IList<DelaunayTriangle> Triangles { get; }
-
-		void AddTriangle(DelaunayTriangle t);
-		void AddTriangles(IEnumerable<DelaunayTriangle> list);
-		void ClearTriangles();
-
-		TriangulationMode TriangulationMode { get; }
-	}
+        void Prepare(TriangulationContext tcx);
+        void AddTriangle(DelaunayTriangle t);
+        void AddTriangles(IEnumerable<DelaunayTriangle> list);
+        void ClearTriangles();
+    }
 }

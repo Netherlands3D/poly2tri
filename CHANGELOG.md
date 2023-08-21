@@ -11,3 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Forked from https://github.com/Unity-Technologies/poly2tri-cs.
 Added package.json.
+
+## [2.0.0]
+
+### Added
+
+Deleted everything, replaced with Poly2Mesh from Netherlands3D
